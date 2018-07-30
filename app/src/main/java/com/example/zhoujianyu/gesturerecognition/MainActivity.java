@@ -5,6 +5,8 @@ import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -16,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     public MyView mview;
     public RequestQueue myQueue;
+    public Button switch_button;
+    String button_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
         myQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.sample_my_view);
         mview = findViewById(R.id.my_view);
+        switch_button = findViewById(R.id.button);
+        button_text = switch_button.getText().toString();
+        switch_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(button_text.equals("start")){button_text = "end";switch_button.setText(button_text);}
+                else{button_text ="start";switch_button.setText(button_text);}
+            }
+        });
 
         // get screen size
         Point size = new Point();
@@ -74,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 return data;
             }
         };
-        req.setRetryPolicy(new DefaultRetryPolicy(1000, 0, 1.0f));
+//        req.setRetryPolicy(new DefaultRetryPolicy(1000, 0, 1.0f));
         myQueue.add(req);
     }
 
@@ -90,9 +104,11 @@ public class MainActivity extends AppCompatActivity {
             capaString+=(" "+Short.toString(data[i]));
         }
 
-        String timeStamp = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss.SSS").format(Calendar.getInstance().getTime());
+        if(button_text.equals("end")){
+            String timeStamp = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss.SSS").format(new Date());
+            sendCloud(timeStamp+capaString+"\n","10.19.11.166","5000");
+        }
 
-        sendCloud(timeStamp+capaString+"\n","10.0.0.67","5000");
         mview.updateData(data);
         mview.invalidate();
     }
