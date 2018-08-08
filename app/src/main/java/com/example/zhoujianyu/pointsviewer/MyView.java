@@ -1,4 +1,4 @@
-package com.example.zhoujianyu.gesturerecognition;
+package com.example.zhoujianyu.pointsviewer;
 
 import android.content.Context;
 import android.content.res.TypedArray;

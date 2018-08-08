@@ -161,7 +161,7 @@ void *run(void *args){
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_zhoujianyu_gesturerecognition_MainActivity_readDiffStart(JNIEnv *env, jobject instance) {
+Java_com_example_zhoujianyu_pointsviewer_MainActivity_readDiffStart(JNIEnv *env, jobject instance) {
 
 
 /*
@@ -190,7 +190,7 @@ Java_com_example_zhoujianyu_gesturerecognition_MainActivity_readDiffStart(JNIEnv
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_zhoujianyu_gesturerecognition_MainActivity_readDiffStop(JNIEnv *env, jobject instance) {
+Java_com_example_zhoujianyu_pointsviewer_MainActivity_readDiffStop(JNIEnv *env, jobject instance) {
 
     // TODO
     if(pipefd[1] < 0)
