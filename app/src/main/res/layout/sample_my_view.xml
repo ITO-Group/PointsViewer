@@ -21,13 +21,20 @@
         app:exampleDrawable="@android:drawable/ic_menu_add"
         app:exampleString="Hello, MyView"
         tools:layout_editor_absoluteX="0dp" />
->
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Start"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="414dp" />
-
+        app2:layout_constraintBottom_toBottomOf="parent"
+        app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toTopOf="@+id/my_view"
+        app2:layout_constraintVertical_bias="0.88" />
 </android.support.constraint.ConstraintLayout>
+

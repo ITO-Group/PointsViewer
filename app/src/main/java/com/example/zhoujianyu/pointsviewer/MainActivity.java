@@ -106,9 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(button_text.equals("end")){
             String timeStamp = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss.SSS").format(new Date());
-            sendCloud(timeStamp+capaString+"\n","10.19.11.166","5000");
+            sendCloud(timeStamp+capaString+"\n","10.19.153.53","5000");
         }
-
         mview.updateData(data);
         mview.invalidate();
     }

@@ -5,8 +5,6 @@ app = Flask(__name__)
 # then run this function, and send back the return value
 fileHandler = open('diffData','a')
 @app.route("/")
-def hello():
-    return "POST images to /mnistify"
 
 @app.route("/", methods=['POST'])
 def receive_data():
