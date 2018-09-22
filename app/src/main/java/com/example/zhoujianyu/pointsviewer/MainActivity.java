@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -16,16 +18,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.zhoujianyu.gesturerecognition.R;
+import com.example.zhoujianyu.pointsviewer.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.zhoujianyu.pointsviewer.GridView.COL_NUM;
+
 
 public class MainActivity extends AppCompatActivity {
-
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -35,13 +38,17 @@ public class MainActivity extends AppCompatActivity {
     public RequestQueue myQueue;
     public Button switch_button;
     String button_text;
+    public TextView special_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myQueue = Volley.newRequestQueue(this);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.sample_my_view);
         mview = findViewById(R.id.my_view);
+        special_view = findViewById(R.id.textView);
         switch_button = findViewById(R.id.button);
         button_text = switch_button.getText().toString();
         switch_button.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * send the str to a remote server
          */
-        String url = "http://"+server_ip+":"+"5000"+"/";
+        String url = "http://"+server_ip+":"+port+"/";
         StringRequest req = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -101,16 +108,23 @@ public class MainActivity extends AppCompatActivity {
     public void processDiff(short[] data) throws InterruptedException{
         // convert short array to a single string in convenience of data storage
         String capaString = "";
-        for(int i = 0;i<data.length;i++){
-            capaString+=(" "+Short.toString(data[i]));
-        }
-
-        if(button_text.equals("end")){
-            String timeStamp = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss.SSS").format(new Date());
-            sendCloud(timeStamp+capaString+"\n","10.19.153.53","5000");
-        }
-        mview.updateData(data);
-        mview.invalidate();
+        final short specialValue = data[14*COL_NUM];
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                special_view.setText(""+specialValue);
+            }
+        });
+//        for(int i = 0;i<data.length;i++){
+//            capaString+=(" "+Short.toString(data[i]));
+//        }
+//
+//        if(button_text.equals("end")){
+//            String timeStamp = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss.SSS").format(new Date());
+//            sendCloud(timeStamp+capaString+"\n","10.19.35.196","5000");
+//        }
+//        mview.updateData(data);
+//        mview.invalidate();
     }
 
     /**

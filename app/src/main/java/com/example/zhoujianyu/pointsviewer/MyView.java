@@ -121,8 +121,8 @@ public class MyView extends View {
             canvas.drawRect(points[i],redPaint);
             canvas.drawRect(points[i],yellowPaint);
             canvas.drawText(Integer.toString(i),left+20,top+40,whitePaint);
-            canvas.drawRect(frame_locations[i/frame_col_num][i%frame_col_num],blackPaint);
-            canvas.drawText(Integer.toString(i)+":\n"+Integer.toString(val),frame_locations[i/frame_col_num][i%frame_col_num].left+10,frame_locations[i/frame_col_num][i%frame_col_num].top+70,blackPaint);
+//            canvas.drawRect(frame_locations[i/frame_col_num][i%frame_col_num],blackPaint);
+//            canvas.drawText(Integer.toString(i)+":\n"+Integer.toString(val),frame_locations[i/frame_col_num][i%frame_col_num].left+10,frame_locations[i/frame_col_num][i%frame_col_num].top+70,blackPaint);
         }
     }
 }

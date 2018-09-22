@@ -138,7 +138,7 @@ void *run(void *args){
                     }
 
                     env->SetShortArrayRegion(diffdata,0,DIFF_LENGTH,frameData.diffData);
-//                    env->SetShortArrayRegion(diffdata,0,DIFF_LENGTH+1,rawdata_after);
+//                    env->SetShortArrayRegion(diffdata,0,DIFF_LENGTH,rawdata_after);
                     //env->SetIntArrayRegion(touchNumdata, 1, 1, touchdata);
 //                    env->SetShortArrayRegion(rawdata,0,DIFF_LENGTH,(jshort*)rawdata_after);//回调java处理函数
                     env->CallVoidMethod((jobject)args,callBack_method,diffdata);
